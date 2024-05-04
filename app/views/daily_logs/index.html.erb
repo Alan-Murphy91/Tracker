@@ -1,0 +1,30 @@
+<h1>Daily Logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Calories Consumed</th>
+      <th>Weight</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @daily_logs.each do |log| %>
+      <tr>
+        <td><%= log.date %></td>
+        <td style="background-color: <%= format_calorie_tier(log.calories_consumed) %>">
+          <%= log.calories_consumed %>
+          <% tier = calorie_tier(log.calories_consumed) %> <!-- Correct the variable to use log.calories_consumed -->
+          <% if tier == 'cutting' %>
+            <%= image_tag 'jay-approves.png', alt: 'Jay approves', height: '50px' %>
+          <% end %>
+        </td>
+
+        <td><%= log.weight %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Log', new_daily_log_path %>
